@@ -7,45 +7,39 @@ class DefaultDataServiceTest {
 
     @Test
     void givenAValidEntryWhenCreateNewObjectShouldReturnOK() {
-        final var expectedMessage = "Created object";
+        final var expectedName = "Kaliel";
         final var service = new DefaultDataService();
 
-        final String createdMessage = service.create();
+        final String createdCustomer = service.create(1L, "Kaliel");
 
-        Assertions.assertNotNull(createdMessage);
-        Assertions.assertEquals(expectedMessage, createdMessage);
+        Assertions.assertNotNull(createdCustomer);
+        Assertions.assertEquals(expectedName, createdCustomer);
     }
 
     @Test
     void givenAValidEntryWhenUpdatedNewObjectShouldReturnOK() {
-        final var expectedMessage = "Updated object";
+        final var expectedUpdated = "Pedro";
         final var service = new DefaultDataService();
 
-        final String updatedMessage = service.update();
+        service.create(1L, "Kaliel");
+        service.update(1L, "Pedro");
 
-        Assertions.assertNotNull(updatedMessage);
-        Assertions.assertEquals(expectedMessage, updatedMessage);
-    }
+        final String get = service.read(1L);
 
-    @Test
-    void givenAValidEntryWhenDeleteNewObjectShouldReturnOK() {
-        final var expectedMessage = "Deleted object";
-        final var service = new DefaultDataService();
-
-        final String deletedMessage = service.delete();
-
-        Assertions.assertNotNull(deletedMessage);
-        Assertions.assertEquals(expectedMessage, deletedMessage);
+        Assertions.assertNotNull(get);
+        Assertions.assertEquals(expectedUpdated, get);
     }
 
     @Test
     void givenAValidEntryWhenReadNewObjectShouldReturnOK() {
-        final var expectedMessage = "Read object";
+        final var expectedName = "Pedro";
         final var service = new DefaultDataService();
 
-        final String readMessage = service.read();
+        service.create(2L, expectedName);
 
-        Assertions.assertNotNull(readMessage);
-        Assertions.assertEquals(expectedMessage, readMessage);
+        final String get = service.read(2L);
+
+        Assertions.assertNotNull(get);
+        Assertions.assertEquals(expectedName, get);
     }
 }

@@ -1,24 +1,26 @@
 package org.example.structural.decorator.logging;
 
+import org.example.structural.decorator.CustomerConnection;
+
 public class DefaultDataService implements DataService {
 
     @Override
-    public String create() {
-        return "Created object";
+    public String create(final long anId, final String aName) {
+        return CustomerConnection.INSTANCE.insert(anId, aName);
     }
 
     @Override
-    public String update() {
-        return "Updated object";
+    public String update(final long anId, final String aName) {
+        return CustomerConnection.INSTANCE.update(anId, aName);
     }
 
     @Override
-    public String delete() {
-        return "Deleted object";
+    public void delete(final long anId) {
+        CustomerConnection.INSTANCE.delete(anId);
     }
 
     @Override
-    public String read() {
-        return "Read object";
+    public String read(final long anId) {
+        return CustomerConnection.INSTANCE.read(anId);
     }
 }
